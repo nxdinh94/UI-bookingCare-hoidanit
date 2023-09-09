@@ -5,7 +5,7 @@
     display: flex;
     .login-container{
         width: 400px;
-        height: 90%;
+        height: 80%;
         margin: auto;
         border-radius: 10px;
         background-color: #ffff;
@@ -20,6 +20,22 @@
         }
         .login-input{
             margin: 8px 0;
+            .custom-input-password{
+                position: relative;
+                
+                .fas.fa-eye{
+                    position:absolute;
+                    right: 10px;
+                    top: 10px;
+                    cursor: pointer;
+                }
+                .fas.fa-eye-slash{
+                    position:absolute;
+                    right: 10px;
+                    top: 10px;
+                    cursor: pointer;
+                }
+            }
         }
         .forgot-password{
             font-size: 0.9rem;
