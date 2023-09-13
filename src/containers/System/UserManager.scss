@@ -30,6 +30,7 @@
     width: 50px;
     border: none;
     outline:none;
+    margin:0 30px;
     background-color: transparent;
     color: orange;
     &:hover{
@@ -47,4 +48,34 @@
         background-color: transparent !important;
         color:           rgb(254, 249, 247) !important;
     }
+}
+
+.modal-user-container{
+    .modal-header{
+        button{
+            background-color: transparent ;
+            border: none;
+            font-size: 2.7rem;
+            color: #fff;
+        }
+    }
+    .modal-user-body{
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        .input-container{
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            
+            input{
+                border: 1px solid #afa7a7;
+                border-radius: 5px;
+                height: 30px;
+                outline: none;
+                padding: 0 10px;
+            }
+        }
+    }
+   
 }
