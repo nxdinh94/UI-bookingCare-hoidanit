@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Modal, ModalHeader, ModalBody, ModalFooter, Button} from 'reactstrap'
+import {emitter} from '../../utils/emitter';
 class ModelUser extends Component {
     constructor(props){
         super(props);
@@ -14,6 +15,19 @@ class ModelUser extends Component {
             address:'',
             
         };
+        this.listenToEmitter();
+    }
+    listenToEmitter (){
+        emitter.on('EVENT_CLEAR_MODAL_DATA', data => {
+            console.log('Listen to emitter from parent', ()=>{
+                this.setState({
+                    email:'',
+                    password:'',
+                    firstName: '',
+                    lastName:'',
+                    address:'',
+                })
+            })});
     }
     componentDidMount() {
     }

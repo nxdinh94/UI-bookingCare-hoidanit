@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import  './UserManager.scss';
-import { getAllUsers, createNewUserService } from '../../services/userService'
+import { getAllUsers, createNewUserService, deleteUserService} from '../../services/userService'
 import ModalUser from './ModalUser';
+import { emitter } from '../../utils/emitter';
 class UserManage extends Component {
 
     constructor(props){
@@ -16,7 +17,6 @@ class UserManage extends Component {
 
     async componentDidMount() {
         await this.getAllUsersFromReact();
-        
     }
     getAllUsersFromReact = async() =>{
         let response =await getAllUsers('ALL');
@@ -48,6 +48,19 @@ class UserManage extends Component {
                 this.setState({
                     isOpenModelUser: !this.state.isOpenModelUser
                 })
+                emitter.emit("EVENT_MODAL_DATA");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    handleDeleteUser = async(user) =>{
+        try {
+            let response = await deleteUserService(user.id);
+            if(response && response.errCode !== 0){
+                
+            }else {
+                await this.getAllUsersFromReact();
             }
         } catch (error) {
             console.error(error);
@@ -97,7 +110,10 @@ class UserManage extends Component {
                                     <td>{item.address}</td>
                                     <td>
                                         <button className='btn-edit'><i className='fas fa-pencil-alt'></i></button>
-                                        <button className='btn-delete'><i className='fas fa-trash'></i></button>
+                                        <button 
+                                            className='btn-delete'
+                                            onClick={() => this.handleDeleteUser(item)}
+                                            ><i className='fas fa-trash'></i></button>
                                     </td>
                                 </tr>)
                             })}
