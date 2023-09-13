@@ -90,7 +90,7 @@ class Login extends Component {
                                         onChange={(e)=>this.handleOnChangePassword(e)}/>
                                 <span
                                     onClick={()=>{this.handleShowHidePassword()}}
-                                > <i class={this.state.isShowPassword ? 'fas fa-eye' : 'fas fa-eye-slash'}></i></span>
+                                > <i className={this.state.isShowPassword ? 'fas fa-eye' : 'fas fa-eye-slash'}></i></span>
                             </div>
                         </div>
 
@@ -112,9 +112,9 @@ class Login extends Component {
                             <span className='login-text-other'>Or Login with</span>
                         </div>
                         <div className='col-12 text-center login-social my-2'>
-                            <i class="fab fa-google-plus-g google"></i>
-                            <i class="fab fa-facebook-f facebook"></i>
-                            <i class="fab fa-twitter twitter"></i>
+                            <i className="fab fa-google-plus-g google"></i>
+                            <i className="fab fa-facebook-f facebook"></i>
+                            <i className="fab fa-twitter twitter"></i>
                         </div>
                     </div>
                 </div>

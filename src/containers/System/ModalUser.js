@@ -1,14 +1,17 @@
 
 
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import {Modal, ModalHeader, ModalBody, ModalFooter, Button} from 'reactstrap'
 class ModelUser extends Component {
     constructor(props){
         super(props);
         this.state = {
-            arrUsers:[],
+            email:'',
+            password:'',
+            firstName: '',
+            lastName:'',
+            address:'',
             
         };
     }
@@ -16,6 +19,32 @@ class ModelUser extends Component {
     }
     toggle = () => {this.props.toggle()}
 
+    handleOnchangeInput = (e, id) => {
+        let copyState = {...this.state};
+        copyState[id] = e.target.value;
+        this.setState({
+            ...copyState
+        });
+    }
+    checkValidate =() =>{
+        let isValid = true;
+        let arrInput = ['email', 'password', 'firstName', 'lastName', 'address'];
+        for(let i = 0; i < arrInput.length; i++){
+            if(!this.state[arrInput[i]]){
+                isValid = false;
+                alert('Missing params', + arrInput[i]);
+                break;
+            }
+        }
+        return isValid;
+    }
+    handleAddNewUser = () => {
+        let isValid = this.checkValidate();
+        if(isValid === true){
+            this.props.createNewUser(this.state);
+
+        }
+    }
     render() {
         return (
             
@@ -31,23 +60,39 @@ class ModelUser extends Component {
                         <div className='modal-user-body'>
                             <div className='input-container'>
                                 <label>Email</label>
-                                <input type='email'/>
+                                <input 
+                                    type='email' 
+                                    onChange={(e) =>{this.handleOnchangeInput(e, 'email')}}
+                                    value={this.state.email}
+                                />
                             </div>
                             <div className='input-container'>
                                 <label>Password</label>
-                                <input type='password'/>
+                                <input 
+                                    type='password' 
+                                    value={this.state.password} 
+                                    onChange={(e) =>{this.handleOnchangeInput(e, 'password')}}/>
                             </div>
                             <div className='input-container'>
                                 <label>First name</label>
-                                <input type='text'/>
+                                <input 
+                                    type='text' 
+                                    value={this.state.firstName} 
+                                    onChange={(e) =>{this.handleOnchangeInput(e, 'firstName')}}/>
                             </div>
                             <div className='input-container'>
                                 <label>Last name</label>
-                                <input type='text'/>
+                                <input 
+                                    type='text' 
+                                    value={this.state.lastName} 
+                                    onChange={(e) =>{this.handleOnchangeInput(e, 'lastName')}}/>
                             </div>
                             <div className='input-container'>
                                 <label>Address</label>
-                                <input type='text'/>
+                                <input 
+                                    type='text' 
+                                    value={this.state.address} 
+                                    onChange={(e) =>{this.handleOnchangeInput(e, 'address')}}/>
                             </div>
                         </div>
 
@@ -55,7 +100,7 @@ class ModelUser extends Component {
                         
                     </ModalBody>
                     <ModalFooter>
-                        <Button color='primary' className='px-3' onClick={()=>{this.toggle()}}>Save</Button>{' '}
+                        <Button color='primary' className='px-3' onClick={()=>{this.handleAddNewUser()}}>Add</Button>{' '}
                         <Button color='secondary' className='px-3' onClick={()=>{this.toggle()}}>Close</Button>
                     </ModalFooter>
             </Modal>
