@@ -1,4 +1,25 @@
 {
+    "homeheader":{
+        "speciality": "Medical specicalty",
+        "searchdoctor": "Find a doctor by spectialty",
+        "healthyfacility": "Health facility",
+        "select-room": "Choose hospital clinic",
+        "doctor": "Doctor",
+        "selectdoctor": "Choose a good doctor",
+        "fee": "Checkup package",
+        "checkhealth": "General health check",
+        "support": "Support"
+    },
+    "banner":{
+        "title1": "NỀN TẢNG Y TẾ",
+        "title2": "CHĂM SÓC SỨC KHỎE TOÀN DIỆN",
+        "child1" : "Specialized examination",
+        "child2": "Remote examination",
+        "child3": "General examination",
+        "child5": "Medical test",
+        "child4": "Mental health",
+        "child6": "Dental examination"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",
