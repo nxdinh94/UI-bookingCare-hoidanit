@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import  './HomeHeader.scss';
+import { LANGUAGES } from '../../utils';
+
+import { changeLanguageApp } from '../../store/actions';
 
 class HomeHeader extends Component {
 
+    changeLanguage = (language) =>{
+        this.props.changeLanguageAppRedux(language);
+        //fire redux event: actions;
+
+    }
+
     render() {
-        
+        let language = this.props.language;//redux
         return (
             <React.Fragment>
                 <div className='home-header-container'>
@@ -40,10 +49,9 @@ class HomeHeader extends Component {
                                     <FormattedMessage id='homeheader.support'/>
                                 </i>
                             </div>
-                            <div className='lang-vi'>VN</div>
-                            <div className='lang-en'>EN</div>
+                            <div className={language === LANGUAGES.VI ? 'lang-vi active' : 'lang-vi'}><span onClick={() => {this.changeLanguage(LANGUAGES.VI)}}>VN</span></div>
+                            <div className={language === LANGUAGES.EN ? 'lang-en active' : 'lang-en'}><span onClick={() => {this.changeLanguage(LANGUAGES.EN)}}>EN</span></div>
                         </div>
-
                     </div>
                 
                     <div className='home-header-banner'>
@@ -97,7 +105,7 @@ class HomeHeader extends Component {
                                 </div>
                                 <div className='option-child'>
                                     <div className='icon-child'>
-                                        <i class="fas fa-briefcase-medical"></i>
+                                        <i className="fas fa-briefcase-medical"></i>
                                     </div>
                                     <div className='text-child'><FormattedMessage id='banner.child6'/></div>
                                 </div>
@@ -114,13 +122,15 @@ class HomeHeader extends Component {
 //redux
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language,
     };
 };
 
 //redux
 const mapDispatchToProps = dispatch => {
     return {
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
     };
 };
 
