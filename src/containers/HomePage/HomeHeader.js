@@ -53,8 +53,8 @@ class HomeHeader extends Component {
                             <div className={language === LANGUAGES.EN ? 'lang-en active' : 'lang-en'}><span onClick={() => {this.changeLanguage(LANGUAGES.EN)}}>EN</span></div>
                         </div>
                     </div>
-                
-                    <div className='home-header-banner'>
+                </div>
+                <div className='home-header-banner'>
                         <div className='content-up'>
                             <div className='title1'><FormattedMessage id='banner.title1'/></div>
                             <div className='title2'><FormattedMessage id='banner.title2'/></div>
@@ -111,7 +111,6 @@ class HomeHeader extends Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </React.Fragment>
         );
