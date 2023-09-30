@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import  './Specialty.scss';
-
+import './MedicalFacility.scss'
 import Slider from 'react-slick';
 
-
-class Specialty extends Component {
+class MedicalFacility extends Component {
 
     render() {
         return (
-            <div className='section-share section-specialty'>
+            <div className='section-share section-medical-facility'>
                 <div className='section-container'>
                     <div className='section-header'>
                         <span className='title-section'>Chuyên khoa phổ biến</span>
@@ -18,28 +16,28 @@ class Specialty extends Component {
                     <div className='section-body'>
                         <Slider {...this.props.settings}>
                         <div className='section-customize'>
-                            <div className='bg-image section-specialty'></div>
-                            <div>Cơ sương khớp 1</div>
+                            <div className='bg-image section-medical-facility'></div>
+                            <div>Hệ thống y tế Thu Cúc</div>
                         </div>
                         <div className='section-customize'>
-                            <div className='bg-image section-specialty'></div>
-                            <div>Cơ sương khớp 1</div>
+                            <div className='bg-image section-medical-facility'></div>
+                            <div>Hệ thống y tế Thu Cúc</div>
                         </div>
                         <div className='section-customize'>
-                           <div className='bg-image section-specialty'></div>
-                            <div>Cơ sương khớp 1</div>
+                           <div className='bg-image section-medical-facility'></div>
+                            <div>Hệ thống y tế Thu Cúc</div>
                         </div>
                         <div className='section-customize'>
-                           <div className='bg-image section-specialty'></div>
-                            <div>Cơ sương khớp 1</div>
+                           <div className='bg-image section-medical-facility'></div>
+                            <div>Hệ thống y tế Thu Cúc</div>
                         </div>
                         <div className='section-customize'>
-                           <div className='bg-image section-specialty'></div>
-                            <div>Cơ sương khớp 1</div>
+                           <div className='bg-image section-medical-facility'></div>
+                            <div>Hệ thống y tế Thu Cúc</div>
                         </div>
                         <div className='section-customize'>
-                            <div className='bg-image section-specialty'></div>
-                            <div>Cơ sương khớp 1</div>
+                            <div className='bg-image section-medical-facility'></div>
+                            <div>Hệ thống y tế Thu Cúc</div>
                         </div>
                 
                     </Slider>
@@ -55,8 +53,7 @@ class Specialty extends Component {
 //redux
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn,
-        language: state.app.language,
+        isLoggedIn: state.user.isLoggedIn
     };
 };
 
@@ -66,4 +63,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacility);
