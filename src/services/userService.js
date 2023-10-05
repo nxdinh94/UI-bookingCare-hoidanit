@@ -20,5 +20,8 @@ export const deleteUserService = (userId) =>{
 export const editUserService = (inputData) =>{
      return axios.put('/api/edit-new-user', inputData);
 }
+export const getAllCodeService = (inputType) =>{
+     return axios.get(`/api/allcode?type=${inputType}`);
+}
 export default handleLoginApi; 
  
