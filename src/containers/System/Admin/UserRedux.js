@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { LANGUAGES } from '../../../utils';
 
 import { getAllCodeService } from '../../../services/userService';
+import * as actions from '../../../store/actions'
 
 class UserRedux extends Component {
 
@@ -15,24 +16,31 @@ class UserRedux extends Component {
     }
 
     async componentDidMount() {
-        try {
-            let res = await getAllCodeService('gender');
-            if(res && res.errCode === 0){
-                this.setState({
-                    genderArr: res.data
-                })
-            }
-            console.log('check res: ',res);
-        } catch (error) {
-            console.log(error);
+        this.props.getGenderStart();
+        // try {
+        //     let res = await getAllCodeService('gender');
+        //     if(res && res.errCode === 0){
+        //         this.setState({
+        //             genderArr: res.data
+        //         })
+        //     }
+        //     console.log('check res: ',res);
+        // } catch (error) {
+        //     console.log(error);
+        // }
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.genderRedux !== this.props.genderRedux){
+            this.setState({
+                genderArr: this.props.genderRedux
+            })
         }
     }
 
-
     render() {
-        console.log('checkState', this.state);
         let genders = this.state.genderArr;
         let language = this.props.language;
+        console.log('check props redux', this.props.genderRedux);
         return (
             <div className='user-redux-container'>
                 <div className='title'>
@@ -69,7 +77,7 @@ class UserRedux extends Component {
                             <div className='col-3'>
                                 <label><FormattedMessage id="manage-user.gender"/></label>
                                 <select className='form-control'> 
-                                    {genders && genders.length>0
+                                    {genders && genders.length>0 
                                         && genders.map((item, index) =>(
                                             <option key={index}>{language === LANGUAGES.VI ? item.valueVi: item.valueEn}
                                             </option>
@@ -117,11 +125,15 @@ class UserRedux extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
+        genderRedux: state.admin.genders
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        getGenderStart: () => dispatch(actions.fetchGenderStart())
+        // processLogout: () => dispatch(actions.processLogout()),
+        // changeLanguageAppRedux: (language) => dispatch(actions.changeLanguageApp(language))
     };
 };
 
