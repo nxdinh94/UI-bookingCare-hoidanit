@@ -4,7 +4,8 @@ import{
     getAllCodeService, 
     createNewUserService, 
     getAllUsers,
-    deleteUserService
+    deleteUserService,
+    editUserService
 } from '../../services/userService';
 
 
@@ -139,7 +140,7 @@ export const deleteUser = (userId) =>{
         } catch (error) {
             toast.error('Delete user failed')
             dispatch(deleteUserFailed());
-            console.log('saveUserFailed',error);
+            console.log('deleteUserFailed',error);
         }
     }
 }
@@ -148,4 +149,28 @@ export const deleteUserSuccess = () => ({
 })
 export const deleteUserFailed = () => ({
     type: actionTypes.DELETE_USER_FAILED,
+})
+
+export const editUser = (data) =>{
+    return async(dispatch, getState) =>{//arguments of redux
+        try {
+            let res = await editUserService(data);
+            if(res && res.errCode === 0){
+                toast.success('Update user success')
+                dispatch(editUserSuccess());
+                dispatch(fetchAllUsersStart());//reload when create newuser
+            }else dispatch(editUserFailed());
+        } catch (error) {
+            toast.error('Update user failed')
+            dispatch(editUserFailed());
+            console.log('updateUserFailed',error);
+        }
+    }
+}
+
+export const editUserSuccess = () => ({
+    type: actionTypes.EDIT_USER_SUCCESS,
+})
+export const editUserFailed = () => ({
+    type: actionTypes.EDIT_USER_FAILED,
 })
