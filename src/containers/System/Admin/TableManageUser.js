@@ -22,9 +22,12 @@ class TableManageUser extends Component {
                 usersRedux: this.props.listUsers,
             })
         }
-    }
+    } 
     handleDeleteUser = (user) =>{
         this.props.deleteUsersRedux(user.id);
+    }
+    handleEditUser = (user) =>{
+        
     }
     
 /** Life cycle 
@@ -54,7 +57,9 @@ class TableManageUser extends Component {
                                 <td>{item.lastName}</td>
                                 <td>{item.address}</td>
                                 <td>
-                                <button className='btn-edit'>
+                                <button 
+                                    onClick={() =>this.handleEditUser(item)}
+                                    className='btn-edit'>
                                         <i className='fas fa-pencil-alt'></i>
                                     </button>
                                     <button 

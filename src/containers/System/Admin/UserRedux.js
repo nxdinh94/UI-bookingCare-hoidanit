@@ -47,7 +47,7 @@ class UserRedux extends Component {
             let newData = this.props.genderRedux
             this.setState({
                 genderArr: newData,
-                gender: newData.length>0?newData[0].key:''
+                gender: newData.length > 0 ? newData[0].key : ''
             })
         }
         if(prevProps.roleRedux !== this.props.roleRedux){
@@ -65,7 +65,9 @@ class UserRedux extends Component {
             })
         }
         if(prevProps.listUsers !== this.props.listUsers){
-            console.log('check resetstate');
+            let arrGenders = this.props.genderRedux;
+            let arrRoles = this.props.roleRedux;
+            let arrPositions = this.props.positionRedux;
             this.setState({
                 email: '',
                 password:'',
@@ -73,9 +75,9 @@ class UserRedux extends Component {
                 lastName:'',
                 phoneNumber:'',
                 address:'',
-                gender:'',
-                position:'',
-                role:'',
+                gender:     arrGenders.length > 0 ? arrGenders[0].key:'',
+                position:   arrRoles.length > 0 ? arrRoles[0].key:'',
+                role:       arrPositions.length > 0 ? arrPositions[0].key:'',
                 avatar:'', 
             })
         }
@@ -224,6 +226,7 @@ class UserRedux extends Component {
                             <div className='col-3'>
                                 <label><FormattedMessage id="manage-user.gender"/></label>
                                 <select 
+                                    value={gender}
                                     className='form-control' 
                                     onChange={(event)=>this.onChangeInput(event, 'gender')}> 
                                     {genders && genders.length>0 
@@ -241,6 +244,7 @@ class UserRedux extends Component {
                             >
                                 <label><FormattedMessage id="manage-user.position"/></label>
                                 <select 
+                                    value={position}
                                     className='form-control'
                                     onChange={(event)=>this.onChangeInput(event, 'position')}
                                 >
@@ -256,6 +260,7 @@ class UserRedux extends Component {
                             > 
                                 <label><FormattedMessage id="manage-user.roleId"/></label>
                                 <select 
+                                    value={role}
                                     className='form-control'
                                     onChange={(event)=>this.onChangeInput(event, 'role')}
                                 >
