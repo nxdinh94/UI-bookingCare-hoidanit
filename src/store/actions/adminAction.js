@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { getAllCodeService } from '../../services/userService';
+import { getAllCodeService, createNewUserService } from '../../services/userService';
 
 
 // export const fetchGenderStart = () => ({
@@ -14,7 +14,7 @@ export const fetchGenderStart = () => {
             })
 
             let res = await getAllCodeService('GENDER');
-            if(res && res.errCode == 0){
+            if(res && res.errCode === 0){
                 dispatch(fetchGenderSuccess(res.data));
             }else dispatch(fetchGenderFailed());
         } catch (error) {
@@ -35,7 +35,7 @@ export const fetchPositionStart = () => {
     return async(dispatch, getState) =>{//arguments of redux
         try {
             let res = await getAllCodeService('POSITION');
-            if(res && res.errCode == 0){
+            if(res && res.errCode === 0){
                 dispatch(fetchPositionSuccess(res.data));
             }else dispatch(fetchPositionFailed());
         } catch (error) {
@@ -56,7 +56,7 @@ export const fetchRoleStart = () => {
     return async(dispatch, getState) =>{//arguments of redux
         try {
             let res = await getAllCodeService('ROLE');
-            if(res && res.errCode == 0){
+            if(res && res.errCode === 0){
                 dispatch(fetchRoleSuccess(res.data));
             }else dispatch(fetchRoleFailed());
         } catch (error) {
@@ -74,4 +74,25 @@ export const fetchRoleFailed = () => ({
     type: actionTypes.FETCH_ROLE_FAILED,
 })
 
+export const createNewUser = (data) =>{
+    return async(dispatch, getState) =>{//arguments of redux
+        try {
+            let res = await createNewUserService(data);
+            console.log('check create userredux: ', res);
+            if(res && res.errCode === 0){
+                dispatch(saveUserSuccess());
+            }else dispatch(saveUserFailed());
+        } catch (error) {
+            dispatch(saveUserFailed());
+            console.log('saveUserFailed',error);
+        }
+    }
+}
+export const saveUserSuccess = () => ({
+    type: 'CREATE_USER_SUCCESS',
+})
+   
+export const saveUserFailed = () => ({
+    type: 'CREATE_USER_FAILED',
+})
    
