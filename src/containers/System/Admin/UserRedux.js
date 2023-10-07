@@ -8,7 +8,7 @@ import './UserRedux.scss';
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 
-
+import TableManageUser from './TableManageUser';
 
 
 
@@ -23,6 +23,7 @@ class UserRedux extends Component {
             isPreviewImage: false,
             previewImageURL:[],
             isOpen: false,
+
             email: '',
             password:'',
             firstName:'',
@@ -63,6 +64,21 @@ class UserRedux extends Component {
                 position: newData.length > 0 ? newData[0].key:'',
             })
         }
+        if(prevProps.listUsers !== this.props.listUsers){
+            console.log('check resetstate');
+            this.setState({
+                email: '',
+                password:'',
+                firstName:'',
+                lastName:'',
+                phoneNumber:'',
+                address:'',
+                gender:'',
+                position:'',
+                role:'',
+                avatar:'', 
+            })
+        }
     }
 
     handleOnchangeImage = (event) =>{
@@ -86,10 +102,9 @@ class UserRedux extends Component {
     handleSaveUser = () => {
         let isValid  = this.checkValidateInput();
         if(!isValid) {
-            alert('cannot crated user');    
-            return
+            return;
         };
-
+        
         //fire redux action
         this.props.createNewUser({
             email: this.state.email,
@@ -101,7 +116,8 @@ class UserRedux extends Component {
             gender : this.state.gender,
             roleId: this.state.role,
             positionId: this.state.position,
-        })
+        });
+        
     }
     checkValidateInput = () =>{
         let isValid = true;
@@ -268,10 +284,10 @@ class UserRedux extends Component {
                                     <div className='preview-image'                                    >
                                         {this.state.isPreviewImage && 
                                             <ImageGallery 
-                                                        items={this.state.previewImageURL} 
-                                                        useBrowserFullscreen 
-                                                        showPlayButton={false}
-                                                        showThumbnails={false}
+                                                items={this.state.previewImageURL} 
+                                                useBrowserFullscreen 
+                                                showPlayButton={false}
+                                                showThumbnails={false}
                                             />}
                                         
                                     </div>
@@ -285,6 +301,9 @@ class UserRedux extends Component {
                                 ><FormattedMessage id="manage-user.save"/>
                                 </button>
                             </div>
+                            <div className='mb-5'>
+                                <TableManageUser/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -296,7 +315,7 @@ class UserRedux extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log('state',state);
+    // console.log('state',state);
     return {
         language: state.app.language,
         genderRedux: state.admin.genders,
@@ -312,6 +331,8 @@ const mapDispatchToProps = dispatch => {
         getPositionStart: () => dispatch(actions.fetchPositionStart()),
         getRoleStart: () => dispatch(actions.fetchRoleStart()),
         createNewUser: (data) => dispatch(actions.createNewUser(data)),
+        fetchAllUsersRedux:()=>dispatch(actions.fetchAllUsersStart())
+
         // processLogout: () => dispatch(actions.processLogout()),
         // changeLanguageAppRedux: (language) => dispatch(actions.changeLanguageApp(language))
     };

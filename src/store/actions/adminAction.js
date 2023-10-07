@@ -1,5 +1,10 @@
 import actionTypes from './actionTypes';
-import { getAllCodeService, createNewUserService } from '../../services/userService';
+import { toast } from 'react-toastify';
+import{ 
+    getAllCodeService, 
+    createNewUserService, 
+    getAllUsers 
+} from '../../services/userService';
 
 
 // export const fetchGenderStart = () => ({
@@ -64,7 +69,6 @@ export const fetchRoleStart = () => {
             console.log('fetchRoleStart',error);
         }
     }
-    
 }
 export const fetchRoleSuccess = (roleData) => ({
     type: actionTypes.FETCH_ROLE_SUCCESS,
@@ -80,7 +84,9 @@ export const createNewUser = (data) =>{
             let res = await createNewUserService(data);
             console.log('check create userredux: ', res);
             if(res && res.errCode === 0){
+                toast.success('Create new user success')
                 dispatch(saveUserSuccess());
+                dispatch(fetchAllUsersStart());//reload when create newuser
             }else dispatch(saveUserFailed());
         } catch (error) {
             dispatch(saveUserFailed());
@@ -94,5 +100,27 @@ export const saveUserSuccess = () => ({
    
 export const saveUserFailed = () => ({
     type: 'CREATE_USER_FAILED',
+})
+
+export const fetchAllUsersStart = () => {
+    return async(dispatch, getState) =>{//arguments of redux
+        try {
+            let res = await getAllUsers('ALL');
+            if(res && res.errCode === 0){
+                dispatch(fetchAllUsersSuccess(res.users.reverse()));
+            }else dispatch(fetchAllUsersFailed());
+        } catch (error) {
+            dispatch(fetchAllUsersFailed());
+            console.log('fetchAllUsersStart',error);
+        }
+    }
+}
+
+export const fetchAllUsersSuccess = (data) =>({
+    type: 'FETCH_ALL_USERS_SUCCESS',
+    users: data,
+})
+export const fetchAllUsersFailed = () =>({
+    type: 'FETCH_ALL_USERS_FAILED',
 })
    
