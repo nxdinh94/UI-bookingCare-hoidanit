@@ -23,6 +23,9 @@ class TableManageUser extends Component {
             })
         }
     }
+    handleDeleteUser = (user) =>{
+        this.props.deleteUsersRedux(user.id);
+    }
     
 /** Life cycle 
  * Run component -> init state
@@ -54,7 +57,9 @@ class TableManageUser extends Component {
                                 <button className='btn-edit'>
                                         <i className='fas fa-pencil-alt'></i>
                                     </button>
-                                    <button className='btn-delete'>
+                                    <button 
+                                        onClick={() =>this.handleDeleteUser(item)}
+                                        className='btn-delete'>
                                         <i className='fas fa-trash'></i>
                                     </button>
                                 </td>
@@ -77,7 +82,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAllUsersRedux:()=>dispatch(actions.fetchAllUsersStart())
+        fetchAllUsersRedux:()=>dispatch(actions.fetchAllUsersStart()),
+        deleteUsersRedux:(id)=>dispatch(actions.deleteUser(id))
     };
 };
 

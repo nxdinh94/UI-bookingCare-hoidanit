@@ -321,7 +321,8 @@ const mapStateToProps = state => {
         genderRedux: state.admin.genders,
         roleRedux: state.admin.roles,
         positionRedux: state.admin.positions,
-        isLoadingGender: state.admin.isLoadingGender
+        isLoadingGender: state.admin.isLoadingGender,
+        listUsers: state.admin.users,
     };
 };
 
